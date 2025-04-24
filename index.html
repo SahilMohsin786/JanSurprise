@@ -1,0 +1,106 @@
+<!-- level1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Birthday Quest - Level 1</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(to bottom, #ffe0f0, #ffe4ec);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      color: #ff1493;
+    }
+    #balloons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .balloon {
+      width: 80px;
+      height: 100px;
+      background: pink;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #999;
+      transform: translateX(-50%);
+    }
+    #message {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: #d10073;
+    }
+    #continue-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎈 Pop 5 Balloons to Begin the Quest!</h1>
+  <div id="balloons"></div>
+  <div id="message"></div>
+  <button id="continue-btn" onclick="location.href='2up.html'">Continue the Quest</button>
+
+  <script>
+    const messages = [
+  "You make my world brighter 🌟",
+  "Every moment with you is a gift 🎁",
+  "You’re my favorite reason to smile 😊",
+  "Falling in love with you was the best thing ever 💖",
+  "You’re loved more than words can say 💌",
+  "My heart is yours forever 💘",
+  "You're the magic in my every day ✨",
+  "To the queen of my heart 👑",
+  "Happy Birthday, my love 🎂",
+  "You + Me = Forever 💑"
+];
+    let popped = 0;
+
+    for (let i = 0; i < 10; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.onclick = () => {
+        if (!balloon.classList.contains('popped')) {
+          balloon.classList.add('popped');
+          balloon.style.background = '#eee';
+          balloon.innerHTML = messages[popped] || "";
+          popped++;
+          if (popped >= 5) {
+            document.getElementById('message').innerText = "Love You, Sahil 💕";
+            document.getElementById('continue-btn').style.display = 'inline-block';
+          }
+        }
+      };
+      document.getElementById('balloons').appendChild(balloon);
+    }
+  </script>
+</body>
+</html>

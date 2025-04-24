@@ -1,0 +1,165 @@
+<!-- level3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Birthday Quest - Level 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital@1&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(to right, #ffe0ec, #fff0f5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #b30059;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .boxes {
+      display: flex;
+      gap: 30px;
+    }
+
+    .box {
+      width: 120px;
+      height: 100px;
+      background: linear-gradient(to bottom, #ff69b4, #ff85c1);
+      border-radius: 12px;
+      border: 2px solid #ff1493;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-8px) scale(1.05);
+    }
+
+    .lid {
+      position: absolute;
+      width: 130px;
+      height: 30px;
+      top: -35px;
+      left: -5px;
+      background: linear-gradient(to bottom, #ff1493, #ff69b4);
+      border-radius: 6px 6px 0 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    #surprise {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: #a8005a;
+      max-width: 90%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    video {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 15px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    #continue-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁 Pick Your Surprise, Love!</h1>
+  <div class="boxes">
+    <div class="box" onclick="openBox(1)"><div class="lid"></div></div>
+    <div class="box" onclick="openBox(2)"><div class="lid"></div></div>
+    <div class="box" onclick="openBox(3)"><div class="lid"></div></div>
+  </div>
+  <div id="surprise"></div>
+  <button id="continue-btn" onclick="location.href='4Up.html'">Continue the Quest</button>
+
+  <script>
+    let opened = false;
+
+    function openBox(num) {
+      if (opened) return;
+      opened = true;
+
+      const surprise = document.getElementById('surprise');
+
+      if (num === 1) {
+        surprise.innerHTML = `
+          <video width="300" controls autoplay>
+            <source src="S1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>Sorry I have No Money 🥺 💕</p>`;
+throwConfetti();
+      } else if (num === 2) {
+        surprise.innerHTML = `
+  <video width="300" controls autoplay>
+            <source src="S1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+<p>Sorry I have No Money 🥺 💕💖</p>`;
+throwConfetti();
+      } else {
+        surprise.innerHTML = `  <video width="300" controls autoplay>
+            <source src="S1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+<p>Sorry I have No Money 🥺 💕😘</p>`;
+        throwConfetti();
+      }
+
+      document.getElementById('continue-btn').style.display = 'inline-block';
+    }
+
+    function throwConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.background = ['#ff69b4', '#ffb6c1', '#ff1493'][Math.floor(Math.random() * 3)];
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.opacity = 0.7;
+        confetti.style.borderRadius = '50%';
+        confetti.style.animation = `fall ${2 + Math.random() * 3}s linear infinite`;
+        document.body.appendChild(confetti);
+      }
+
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fall {
+          to { transform: translateY(100vh) rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  </script>
+</body>
+</html>
